@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            position: relative;
+        }
+        .message {
+            position: relative;
+            z-index: 1;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            position: relative;
+        }
+        #noBtn {
+            position: absolute;
+        }
+        .image-container {
+            position: relative;
+            z-index: 1;
+            margin-top: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 5px solid white; /* Puedes personalizar el grosor y color del borde */
+            border-radius: 10px; /* Puedes cambiar el radio del borde */
+        }
+        @keyframes snow {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            font-size: 1em;
+            opacity: 0.9;
+            color: white;
+            animation: snow linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h1>¿Quieres ver la página?</h1>
+        <div class="buttons">
+            <button class="btn" onclick="window.location.href='Index.html'">Sí</button>
+            <button class="btn" id="noBtn">No</button>
+        </div>
+    </div>
+
+    <div class="image-container">
+        <img src="amor.jpeg" alt="Descripción de la imagen">
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        });
+
+        // Function to create snowflakes
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.innerHTML = '&#10052;'; // Unicode character for snowflake
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // 2 to 5 seconds
+
+            document.body.appendChild(snowflake);
+
+            // Remove snowflake after it falls
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        // Create snowflakes at intervals
+        setInterval(createSnowflake, 200);
+    </script>
+</body>
+</html>
